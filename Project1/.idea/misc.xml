@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/ECS198F/Project1/app/src/main/res/layout/activity_food_truck_detail.xml" value="0.2" />
         <entry key="..\:/Users/nicol/AndroidStudioProjects/ECS198F/Project1/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/nicol/AndroidStudioProjects/ECS198F/Project1/app/src/main/res/layout/food_truck_item.xml" value="0.2" />
       </map>
     </option>
   </component>
