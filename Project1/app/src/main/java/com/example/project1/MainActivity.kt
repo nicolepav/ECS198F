@@ -3,21 +3,28 @@ package com.example.project1
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.project1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        // setting up data binding per tutorial vid
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         val adapter = RecyclerViewAdapter(foodTruckData)
-        val recyclerView = findViewById<RecyclerView>(R.id.mainRecycler)
-        recyclerView.adapter = adapter;
+        val recyclerView = binding.mainRecycler
+        recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
     }
 
-    val foodTruckData = listOf<FoodTruck>(
+    private val foodTruckData = listOf<FoodTruck>(
 
         FoodTruck(
             0,
@@ -69,7 +76,8 @@ class MainActivity : AppCompatActivity() {
             "Storer Hall",
             "1pm - 4pm",
             "Hefty Gyros is a family owned and operated food truck that serves delicious and great quality food. As a family owned business, we put our heart and soul with passion to serve the most authentic and delicious Mediterranean food.",
-            "https://heftygyros.com/")
+            "https://heftygyros.com/"
+        )
     )
 
 }
