@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/foodTruckListFragment">
+
+    <fragment
+        android:id="@+id/foodTruckListFragment"
+        android:name="com.example.project2.FoodTruckListFragment"
+        android:label="fragment_food_truck_list"
+        tools:layout="@layout/fragment_food_truck_list" >
+        <action
+            android:id="@+id/action_foodTruckListFragment_to_foodTruckDetailFragment"
+            app:destination="@id/foodTruckDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/foodTruckDetailFragment"
+        android:name="com.example.project2.FoodTruckDetailFragment"
+        android:label="fragment_food_truck_detail"
+        tools:layout="@layout/fragment_food_truck_detail" >
+        <argument
+            android:name="truckid"
+            app:argType="string"
+            android:defaultValue="1" />
+        <argument
+            android:name="truckname"
+            app:argType="string"
+            android:defaultValue="truck-name" />
+        <argument
+            android:name="trucklocation"
+            app:argType="string"
+            android:defaultValue="truck-location" />
+        <argument
+            android:name="truckhours"
+            app:argType="string"
+            android:defaultValue="truck-hours" />
+        <argument
+            android:name="pricelevel"
+            app:argType="float"
+            android:defaultValue="0" />
+        <argument
+            android:name="truckImgUrl"
+            app:argType="string"
+            android:defaultValue='"https://media.newyorker.com/photos/61a5800b07516aaf7967f1ee/master/w_2560%2Cc_limit/Monroe-OldTrucksNewMoney.jpg"' />
+        <argument
+            android:name="foodTruck"
+            app:argType="com.example.project2.FoodTruck" />
+    </fragment>
+</navigation>
