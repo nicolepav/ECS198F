@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FoodTrucks</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab1">Menu</string>
+    <string name="tab2">Reviews</string>
 </resources>
