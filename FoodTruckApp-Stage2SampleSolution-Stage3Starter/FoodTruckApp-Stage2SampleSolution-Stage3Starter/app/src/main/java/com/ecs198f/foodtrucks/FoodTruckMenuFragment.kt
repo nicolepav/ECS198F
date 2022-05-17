@@ -7,16 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.ecs198f.foodtrucks.databinding.FragmentFoodTruckDetailBinding
 import com.ecs198f.foodtrucks.databinding.FragmentFoodTruckMenuBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+public const val ARG_OBJECT = "object"
 
-class FoodTruckMenuFragment : Fragment() {
+class FoodTruckMenuFragment(): Fragment() {
 
+    private var ARG_OBJECT: FoodTruck? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            ARG_OBJECT = it.getParcelable("ARG_OBJECT")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,12 +33,18 @@ class FoodTruckMenuFragment : Fragment() {
         val binding = FragmentFoodTruckMenuBinding.inflate(inflater, container, false)
         val recyclerViewAdapter = FoodItemListRecyclerViewAdapter(listOf())
 
-        args.foodTruck.let {
+        binding.apply {
+            foodItemListRecyclerView.apply {
+                    adapter = recyclerViewAdapter
+                    layoutManager = LinearLayoutManager(context)
+                }
+        }
 
-            (requireActivity() as MainActivity).apply {
-                title = it.name
+        (requireActivity() as MainActivity).apply {
 
-                foodTruckService.listFoodItems(it.id).enqueue(object : Callback<List<FoodItem>> {
+
+            ARG_OBJECT?.id?.let {
+                foodTruckService.listFoodItems(it).enqueue(object : Callback<List<FoodItem>> {
                     override fun onResponse(
                         call: Call<List<FoodItem>>,
                         response: Response<List<FoodItem>>
@@ -44,25 +58,16 @@ class FoodTruckMenuFragment : Fragment() {
                 })
             }
         }
+
+        return binding.root
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FoodTruckMenuFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FoodTruckMenuFragment().apply {
-                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-                }
+        fun newInstance(truck: FoodTruck) = FoodTruckMenuFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable("ARG_OBJECT", truck)
             }
+        }
     }
 }
